@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const nav = document.querySelector('.nav-links');
     const navLinks = document.querySelectorAll('.nav-links li');
     const contactBtn = document.querySelector('.scroll-to-contact');
+    const pricingBtn = document.querySelector('.scroll-to-pricing'); // New button
 
     // Toggle Nav
     burger.addEventListener('click', () => {
@@ -24,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', () => {
             nav.classList.remove('nav-active');
             burger.classList.remove('toggle');
-            navLinks.forEach(item => item.style.animation = ''); // Reset animation
+            navLinks.forEach(item => item.style.animation = '');
         });
     });
 
@@ -56,14 +57,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Scroll to pricing from hero button
+    if (pricingBtn) {
+        pricingBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    }
+
 
     // Intersection Observer for fade-in animations
     const faders = document.querySelectorAll('.fade-in');
     const sliders = document.querySelectorAll('.slide-up');
 
     const appearOptions = {
-        threshold: 0.1, // Element visible 10%
-        rootMargin: "0px 0px -50px 0px" // Start animation slightly before it's fully in view
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
     };
 
     const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
